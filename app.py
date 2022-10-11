@@ -16,8 +16,8 @@ def add_new_hero():
 
     # checking to see if each value that is entered by client is a str, if not it stops there
     valid_check = a.check_endpoint_info(request.json, ['name', 'description', 'img_url'])
-    if(type(valid_check) == str):
-        return valid_check
+    if(valid_check != None):
+        return make_response(json.dumps(valid_check, default=str), 400)
 
     result = dh.run_statement('CALL add_new_hero(?,?,?)', [name, description, img_url])
     if(type(result) == list):
@@ -48,8 +48,8 @@ def add_new_villain():
 
     # checking to see if each value that is entered by client is a str, if not it stops there
     valid_check = a.check_endpoint_info(request.json, ['name', 'description', 'img_url', 'hero_id'])
-    if(type(valid_check) == str):
-        return valid_check
+    if(valid_check != None):
+        return make_response(json.dumps(valid_check, default=str), 400)
 
     result = dh.run_statement('CALL add_new_villain(?,?,?)', [name, description, img_url, hero_id])
     if(type(result) == list):
@@ -65,8 +65,8 @@ def show_all_villain_related_to_hero():
     hero_id = request.args.get('hero_id')
 
     valid_check = a.check_endpoint_info(request.args, ['hero_id'])
-    if(type(valid_check) == str):
-        return valid_check
+    if(valid_check != None):
+        return make_response(json.dumps(valid_check, default=str), 400)
 
     result = dh.run_statement('CALL show_all_villain_related_hero(?)', [hero_id])
     if(type(result) == list):
