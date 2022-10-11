@@ -51,7 +51,7 @@ def add_new_villain():
     if(valid_check != None):
         return make_response(json.dumps(valid_check, default=str), 400)
 
-    result = dh.run_statement('CALL add_new_villain(?,?,?)', [name, description, img_url, hero_id])
+    result = dh.run_statement('CALL add_new_villain(?,?,?,?)', [name, description, img_url, hero_id])
     if(type(result) == list):
         # using make response to make it easier for me to debug
         # http response 200 = success, 400 = connection problem

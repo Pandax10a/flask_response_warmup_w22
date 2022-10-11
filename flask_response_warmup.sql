@@ -28,7 +28,7 @@ CREATE TABLE `hero` (
   `description` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
   `image_url` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `hero` (
 
 LOCK TABLES `hero` WRITE;
 /*!40000 ALTER TABLE `hero` DISABLE KEYS */;
-INSERT INTO `hero` VALUES (1,'Saitama','a gag super hero character, that takes one punch to defeat opponent','https://i.imgur.com/jMjo8YV.png');
+INSERT INTO `hero` VALUES (1,'Saitama','a gag super hero character, that takes one punch to defeat opponent','https://i.imgur.com/jMjo8YV.png'),(2,'testing hero 2','a gag super hero character, that takes one punch to defeat opponent','https://i.imgur.com/jMjo8YV.png'),(3,'','a gag super hero character, that takes one punch to defeat opponent','https://i.imgur.com/jMjo8YV.png'),(4,'testing 45','a gag super hero character, that takes one punch to defeat opponent','https://i.imgur.com/jMjo8YV.png');
 /*!40000 ALTER TABLE `hero` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `villain` (
   PRIMARY KEY (`id`),
   KEY `villain_FK` (`hero_id`),
   CONSTRAINT `villain_FK` FOREIGN KEY (`hero_id`) REFERENCES `hero` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `villain` (
 
 LOCK TABLES `villain` WRITE;
 /*!40000 ALTER TABLE `villain` DISABLE KEYS */;
-INSERT INTO `villain` VALUES (1,'Boros','Boros may be the first cyberpunk cyclops in anime and along with the striking looks of this villain, Boros boasts quite a powerful skillset. Along with the durability, speed','https://i.imgur.com/Mfq0seu.png',1);
+INSERT INTO `villain` VALUES (1,'Boros','Boros may be the first cyberpunk cyclops in anime and along with the striking looks of this villain, Boros boasts quite a powerful skillset. Along with the durability, speed','https://i.imgur.com/Mfq0seu.png',1),(2,'Boros 34','Boros may be the first cyberpunk cyclops in anime and along with the striking looks of this villain, Boros boasts quite a powerful skillset. Along with the durability, speed','https://i.imgur.com/Mfq0seu.png',2),(3,'Boros 343','Boros may be the first cyberpunk cyclops in anime and along with the striking looks of this villain, Boros boasts quite a powerful skillset. Along with the durability, speed','https://i.imgur.com/Mfq0seu.png',3);
 /*!40000 ALTER TABLE `villain` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `add_new_villain`(name_input varchar(100), description_input varchar(255), image_url_input varchar(200), hero_id_input int unsigned)
     MODIFIES SQL DATA
 begin
-	insert into villain(name, description, image_url)
+	insert into villain(name, description, image_url, hero_id)
 	values
 	(name_input, description_input, image_url_input, hero_id_input);
 	commit;
@@ -170,4 +170,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-11 15:58:38
+-- Dump completed on 2022-10-11 16:25:18
